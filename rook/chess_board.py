@@ -118,7 +118,7 @@ class ChessBoard:
         return None
 
     def __str__(self) -> str:
-        result = ""
+        result = f"{' ' * 2}{'-' * 4 * BOARD_SIZE}\n"
 
         for file in reversed(list(File)):
             result += f"{str(BOARD_SIZE - file.value)} "
