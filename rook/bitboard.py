@@ -106,29 +106,30 @@ class Bitboard:
     def full_bitboard(self) -> int:
         return reduce(lambda x, y: x | y, asdict(self).values())
 
-    def get_position_mask(self, rank: Rank, file: File) -> int:
+    def _get_position_mask(self, rank: Rank, file: File) -> int:
         return int(math.pow(2, 63 - rank.value - file.value * BOARD_SIZE))
 
-    def get_piece_at_position(self, rank: Rank, file: File) -> Optional[ChessPiece]:
-        position_mask = self.get_position_mask(rank, file)
+    def _get_piece_at_position(self, rank: Rank, file: File) -> Optional[ChessPiece]:
+        position_mask = self._get_position_mask(rank, file)
 
         for piece, bitboard in self.__dict__.items():
             if bitboard & position_mask:
                 return ChessPiece(piece)
         return None
 
-    # def __str__(self) -> str:
-    #     result = ""
+    def __str__(self) -> str:
+        result = ""
 
-    #     # ranks = "abcdefgh".split(" ")
-    #     # files = range(1, 9)
+        for file in File:
+            result += f"{str(file.value + 1)} "
+            for rank in Rank:
+                chess_piece = self._get_piece_at_position(rank, file)
+                chess_piece_symbol = (
+                    " " if chess_piece is None else CHESS_PIECE_UNICODE_MAP[chess_piece]
+                )
+                result += f"| {chess_piece_symbol} "
+            result += f"|\n  {'-' * 4 * 8}\n"
 
-    #     # for row in range(8):
-    #     #     for col in range(8):
-    #     #         result += "| ♙ "
-    #     #     result += f"|\n{'_' * 4 * 8}_\n"
+        result += " " * 4 + "   ".join([f"{rank.name}" for rank in Rank])
 
-    #     # for bit_index in range(63, -1, -1):
-    #     #     value = math.pow(2, bit_index)
-
-    #     return result
+        return result
