@@ -4,4 +4,4 @@ install:
 	uv install
 
 test:
-	uv run pytest
+	uv run pytest --cov=rook tests/
