@@ -1,9 +1,9 @@
-from bitboard import Bitboard
+from chess_board import ChessBoard
 
 
 def main():
     print("Hello from rook!")
-    print(Bitboard())
+    print(ChessBoard())
 
 
 if __name__ == "__main__":
