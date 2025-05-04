@@ -1,10 +1,14 @@
-from dataclasses import asdict, dataclass
-from functools import reduce
+from dataclasses import dataclass
 from enum import Enum
 import math
 from typing import Optional
 
+# --------------- GLOBAL CONSTANTS ----------
+
 BOARD_SIZE = 8
+
+
+# --------------- ENUMS ----------
 
 
 class Rank(Enum):
@@ -44,6 +48,8 @@ class ChessPiece(Enum):
     BLACK_KING = "black_king"
 
 
+# ---------------  MAPPINGS ----------
+
 CHESS_PIECE_UNICODE_MAP = {
     ChessPiece.WHITE_PAWN: "♙",
     ChessPiece.WHITE_ROOK: "♖",
@@ -58,6 +64,9 @@ CHESS_PIECE_UNICODE_MAP = {
     ChessPiece.BLACK_QUEEN: "♛",
     ChessPiece.BLACK_KING: "♚",
 }
+
+
+# --------------- CLASS DEFINITIONS ----------
 
 
 @dataclass
@@ -102,15 +111,11 @@ class Bitboard:
         0b_00001000_00000000_00000000_00000000_00000000_00000000_00000000_00000000
     )
 
-    @property
-    def full_bitboard(self) -> int:
-        return reduce(lambda x, y: x | y, asdict(self).values())
-
-    def _get_position_mask(self, rank: Rank, file: File) -> int:
+    def get_position_mask(self, rank: Rank, file: File) -> int:
         return int(math.pow(2, 63 - rank.value - file.value * BOARD_SIZE))
 
-    def _get_piece_at_position(self, rank: Rank, file: File) -> Optional[ChessPiece]:
-        position_mask = self._get_position_mask(rank, file)
+    def get_piece_at_position(self, rank: Rank, file: File) -> Optional[ChessPiece]:
+        position_mask = self.get_position_mask(rank, file)
 
         for piece, bitboard in self.__dict__.items():
             if bitboard & position_mask:
@@ -123,7 +128,7 @@ class Bitboard:
         for file in File:
             result += f"{str(file.value + 1)} "
             for rank in Rank:
-                chess_piece = self._get_piece_at_position(rank, file)
+                chess_piece = self.get_piece_at_position(rank, file)
                 chess_piece_symbol = (
                     " " if chess_piece is None else CHESS_PIECE_UNICODE_MAP[chess_piece]
                 )
