@@ -12,6 +12,8 @@ BOARD_SIZE = 8
 
 
 class Rank(Enum):
+    "Value corresponds to the index within the row"
+
     A = 0
     B = 1
     C = 2
@@ -23,6 +25,8 @@ class Rank(Enum):
 
 
 class File(Enum):
+    "Value corresponds to the index within the column"
+
     ONE = 7
     TWO = 6
     THREE = 5
@@ -126,13 +130,13 @@ class Bitboard:
         result = ""
 
         for file in reversed(list(File)):
-            result += f"{str(8 - file.value)} "
+            result += f"{str(BOARD_SIZE - file.value)} "
             for rank in Rank:
                 chess_piece = self.get_piece_at_position(rank, file)
                 chess_piece_symbol = (
                     " " if chess_piece is None else CHESS_PIECE_UNICODE_MAP[chess_piece]
                 )
                 result += f"| {chess_piece_symbol} "
-            result += f"|\n  {'-' * 4 * 8}\n"
+            result += f"|\n  {'-' * 4 * BOARD_SIZE}\n"
         result += " " * 4 + "   ".join([rank.name for rank in Rank])
         return result

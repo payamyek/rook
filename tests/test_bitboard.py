@@ -1,4 +1,4 @@
-import pytest  # noqa: F401
+import pytest  # type: ignore # noqa: F401
 from rook.bitboard import Bitboard, File, Rank, ChessPiece
 
 
