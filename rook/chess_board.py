@@ -11,7 +11,7 @@ BOARD_SIZE = 8
 
 
 class Rank(Enum):
-    "Value corresponds to the index within the row"
+    "Value corresponds to a column index"
 
     A = 0
     B = 1
@@ -24,7 +24,7 @@ class Rank(Enum):
 
 
 class File(Enum):
-    "Value corresponds to the index within the column"
+    "Value corresponds to a row index"
 
     ONE = 7
     TWO = 6
