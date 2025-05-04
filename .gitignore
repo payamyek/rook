@@ -9,4 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# Vscode
+.vscode
+
+# PyTest
 .coverage
+.pytest_cache
