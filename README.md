@@ -19,7 +19,7 @@ We use [bitboards](https://pages.cs.wisc.edu/~psilord/blog/data/chess-pages/rep.
 
 > **_How do I define a number using binary in Python?:_** You can simply prefix a number with `0b` to define a number using it's binary representation. For example, `num = 0b10` defines the binary number `10` which is the decimal number `2`.
 
-This board representation is mainly composed of two classes in `rook/chess_board.py`:
+The board representation is composed of two classes in `rook/chess_board.py`:
 
-1. `ChessBoard` -> stores a list of all the chess pieces
+1. `ChessBoard` -> stores a immutable list (i.e. tuple) of all the chess pieces
 2. `ChessPiece` -> represents a chess piece where the piece's positions are encoded in a bitboard
