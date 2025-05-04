@@ -125,8 +125,8 @@ class Bitboard:
     def __str__(self) -> str:
         result = ""
 
-        for file in File:
-            result += f"{str(file.value + 1)} "
+        for file in reversed(list(File)):
+            result += f"{str(8 - file.value)} "
             for rank in Rank:
                 chess_piece = self.get_piece_at_position(rank, file)
                 chess_piece_symbol = (
@@ -134,7 +134,5 @@ class Bitboard:
                 )
                 result += f"| {chess_piece_symbol} "
             result += f"|\n  {'-' * 4 * 8}\n"
-
-        result += " " * 4 + "   ".join([f"{rank.name}" for rank in Rank])
-
+        result += " " * 4 + "   ".join([rank.name for rank in Rank])
         return result
