@@ -1,7 +1,4 @@
-.PHONY: install test
-
-install:
-	uv install
+.PHONY: run test
 
 run:
 	uv run ./rook/main.py
