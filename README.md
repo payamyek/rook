@@ -1,4 +1,4 @@
-# Rook – UCI-Compatible Chess Engine
+# Rook – UCI Chess Engine
 
 **Rook** is a high-performance chess engine that implements the [Universal Chess Interface (UCI)](https://en.wikipedia.org/wiki/Universal_Chess_Interface). Designed for speed, intelligence, and forward-thinking play, Rook offers a unique and efficient approach to computer chess.
 
